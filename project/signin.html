@@ -33,7 +33,11 @@
             </div>
         </nav>
         <!-- UI of Login -->
-        <div id="firebaseui-auth-container"></div>
+        <div id="outbox" style="height: 82vh">
+        	<div id="weight" style="height: 25vh"></div>
+        	<div id="firebaseui-auth-container"></div>
+        	<div id="loader">Loading...</div>
+    	</div>
         <!-- Footer-->
         <footer class="py-5 bg-dark">
             <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2021</p></div>
@@ -58,8 +62,23 @@
 	    // Initialize the FirebaseUI Widget using Firebase.
 		var ui = new firebaseui.auth.AuthUI(firebase.auth());
 		ui.start('#firebaseui-auth-container', {
+			callbacks: {
+			    signInSuccessWithAuthResult: function(authResult, redirectUrl) {
+			      // User successfully signed in.
+			      // Return type determines whether we continue the redirect automatically
+			      // or whether we leave that to developer to handle.
+			      return false;
+			    },
+			    uiShown: function() {
+			      // The widget is rendered.
+			      // Hide the loader.
+			      document.getElementById('loader').style.display = 'none';
+			    }
+			},
 			signInOptions: [
 			{
+				signInFlow: 'popup',
+				signInSuccessUrl: 'https://sangwoo9734.github.io/SE_TEAM1/project/index.html', // Enter our URL of index page
 				provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
 				requireDisplayName: false
 			}]
