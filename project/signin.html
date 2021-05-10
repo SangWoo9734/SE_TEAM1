@@ -10,6 +10,7 @@
         <link href="css/styles.css" rel="stylesheet" />
         <script src="https://www.gstatic.com/firebasejs/ui/4.8.0/firebase-ui-auth.js"></script>
 		<link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.0/firebase-ui-auth.css" />
+		<script type="text/javascript" src ="js/loginListener.js"></script>
 	</head>
 	<body>
 	   <!-- Navigation-->
@@ -33,8 +34,8 @@
             </div>
         </nav>
         <!-- UI of Login -->
-        <div id="outbox" style="height: 82vh">
-        	<div id="weight" style="height: 25vh"></div>
+        <div class="outbox">
+        	<div class="weight"></div>
         	<div id="firebaseui-auth-container"></div>
         	<div id="loader">Loading...</div>
     	</div>
@@ -59,16 +60,34 @@
 
 	    // Initialize Firebase
 	    firebase.initializeApp(firebaseConfig);
-	    // Initialize the FirebaseUI Widget using Firebase.
-		var ui = new firebaseui.auth.AuthUI(firebase.auth());
-		ui.start('#firebaseui-auth-container', {
+	    // set Persistence of Sign-In status(Until users sign out)
+	    firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+		// Temp variable to hold the anonymous user data if needed.
+		var data = null;
+		// Hold a reference to the anonymous current user.
+		var anonymousUser = firebase.auth().currentUser;
+		// Initialize the FirebaseUI Widget using Firebase.
+		var uiconfig = {
 			callbacks: {
-			    signInSuccessWithAuthResult: function(authResult, redirectUrl) {
+			    signInSuccess: function(currentUser, credential, redirectUrl) {
 			      // User successfully signed in.
-			      // Return type determines whether we continue the redirect automatically
-			      // or whether we leave that to developer to handle.
-			      return false;
+			      window.location.href = redirectUrl
+			      return true;
 			    },
+			    signInFailure: function(error) {
+			    	// For merge conflicts, the error.code will be
+				    // 'firebaseui/anonymous-upgrade-merge-conflict'.
+				    if (error.code != 'firebaseui/anonymous-upgrade-merge-conflict') {
+				      return Promise.resolve();
+				    }
+				    // The credential the user tried to sign in with.
+				    var cred = error.credential;
+				    // Copy data from anonymous user to permanent user and delete anonymous
+				    // user.
+				    // ...
+				    // Finish sign-in after data is copied.
+				    return firebase.auth().signInWithCredential(cred);
+				},
 			    uiShown: function() {
 			      // The widget is rendered.
 			      // Hide the loader.
@@ -78,11 +97,14 @@
 			signInOptions: [
 			{
 				signInFlow: 'popup',
-				signInSuccessUrl: 'https://sangwoo9734.github.io/SE_TEAM1/project/index.html', // Enter our URL of index page
+				autoUpgradeAnonymousUsers: true,
+				signInSuccessUrl: 'https://sangwoo9734.github.io/SE_TEAM1/project/index.html',
 				provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
 				requireDisplayName: false
 			}]
-		});
+		};
+		var ui = new firebaseui.auth.AuthUI(firebase.auth());
+		ui.start('#firebaseui-auth-container', uiconfig);
 	  </script>
 	</body>
 </html>
