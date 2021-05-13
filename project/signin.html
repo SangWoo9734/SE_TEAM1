@@ -10,7 +10,6 @@
         <link href="css/styles.css" rel="stylesheet" />
         <script src="https://www.gstatic.com/firebasejs/ui/4.8.0/firebase-ui-auth.js"></script>
 		<link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.0/firebase-ui-auth.css" />
-		<script type="text/javascript" src ="js/loginListener.js"></script>
 	</head>
 	<body>
 	   <!-- Navigation-->
@@ -71,7 +70,6 @@
 			callbacks: {
 			    signInSuccess: function(currentUser, credential, redirectUrl) {
 			      // User successfully signed in.
-			      window.location.href = redirectUrl
 			      return true;
 			    },
 			    signInFailure: function(error) {
@@ -94,13 +92,13 @@
 			      document.getElementById('loader').style.display = 'none';
 			    }
 			},
+			signInSuccessUrl: 'index.html',
 			signInOptions: [
 			{
 				signInFlow: 'popup',
 				autoUpgradeAnonymousUsers: true,
-				signInSuccessUrl: 'https://sangwoo9734.github.io/SE_TEAM1/project/index.html',
 				provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
-				requireDisplayName: false
+				requireDisplayName: true
 			}]
 		};
 		var ui = new firebaseui.auth.AuthUI(firebase.auth());
