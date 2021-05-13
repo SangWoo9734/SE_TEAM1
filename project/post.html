@@ -10,6 +10,40 @@
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles_post.css" rel="stylesheet" />
+        <!-- Firebase part -->
+        <script src="https://www.gstatic.com/firebasejs/8.4.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.4.0/firebase-analytics.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.4.0/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.4.0/firebase-firestore.js"></script>
+        <script type="text/javascript">
+            var firebaseConfig = {
+              apiKey: "AIzaSyD6ncJWml82Xzk_dVYydIC8NzBUawuJb9E",
+              authDomain: "se-termproject-team1.firebaseapp.com",
+              projectId: "se-termproject-team1",
+              storageBucket: "se-termproject-team1.appspot.com",
+              messagingSenderId: "197301464509",
+              appId: "1:197301464509:web:775de202359b76b06836d4"
+            };
+
+            // Initialize Firebase
+            firebase.initializeApp(firebaseConfig);
+            firebase.auth().onAuthStateChanged(function(user) {
+                if (user) {
+                    var login = document.getElementById("login");
+                    var logout = document.getElementById("logout");
+
+                    login.style.display = 'none';
+                    logout.style.display = 'block';
+                }
+                else {
+                    var login = document.getElementById("login");
+                    var logout = document.getElementById("logout");
+
+                    login.style.display = 'block';
+                    logout.style.display = 'none';
+                }
+            });
+        </script>
     </head>
     <body>
         <!-- Navigation-->
@@ -26,8 +60,17 @@
                             <a class="nav-link" href="post.html">
                                 Post Board
                                 <span class="sr-only">(current)</span>
-                            </a></li>
-                        <li class="nav-item"><a class="nav-link" href="signin.html">Sign In</a></li>
+                            </a>
+                        </li>
+                        <li id="login" class="nav-item"><a class="nav-link" href="signin.html">Sign In</a></li>
+                        <li id="logout" class="nav-item" style="display: none"><a class="nav-link">Sign Out</a></li>
+                        <script>
+                            var logout = document.getElementById("logout");
+                            logout.onclick = function() {
+                                firebase.auth().signOut();
+                                window.location.reload();
+                            }
+                        </script>
                     </ul>
                 </div>
             </div>
