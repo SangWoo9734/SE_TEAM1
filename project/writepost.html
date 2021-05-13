@@ -30,6 +30,23 @@
               
               firebase.initializeApp(firebaseConfig);
               var db = firebase.firestore();
+               // Initialize Firebase
+            firebase.auth().onAuthStateChanged(function(user) {
+                if (user) {
+                    var login = document.getElementById("login");
+                    var logout = document.getElementById("logout");
+
+                    login.style.display = 'none';
+                    logout.style.display = 'block';
+                }
+                else {
+                    var login = document.getElementById("login");
+                    var logout = document.getElementById("logout");
+
+                    login.style.display = 'block';
+                    logout.style.display = 'none';
+                }
+            });
 
               var imgURL;
             function readURL(input) {
@@ -81,15 +98,21 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
-                    	<li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="post.html">Post Board</a></li>
-                        <li class="nav-item active">
-                            <a class="nav-link" href="signin.html">
-                                Sign In
-                                <span class="sr-only">(current)</span>
-                            </a>
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Home</a>
                         </li>
- 
+                        <li class="nav-item active">
+                            <a class="nav-link" href="post.html"> Post Board</a>
+                        </li>
+                        <li id="login" class="nav-item"><a class="nav-link" href="signin.html">Sign In</a></li>
+                        <li id="logout" class="nav-item" style="display: none"><a class="nav-link">Sign Out</a></li>
+                        <script>
+                            var logout = document.getElementById("logout");
+                            logout.onclick = function() {
+                                firebase.auth().signOut();
+                                window.location.reload();
+                            }
+                        </script>
                     </ul>
                 </div>
             </div>
