@@ -79,10 +79,15 @@
                 store.getDownloadURL().then(function(url){
                 var title=document.getElementById("title").value;
                 var content=document.getElementById("contents").value;
-                db.collection("users").add({
+                var user=firebase.auth().currentUser;
+                var uid=user.email;
+                var now=new Date();
+                db.collection("Post").add({
                     Title: title,
                     IMG: url,
-                    Content: content
+                    Content: content,
+                    UID: uid,
+                    Date: now
                     }); 
                 }).catch(function(error){});
             }
