@@ -84,10 +84,8 @@
                     IMG: url,
                     Content: content
                     }); 
-                    location.href="file:///C:/SE_project/project/post.html";
                 }).catch(function(error){});
             }
-            
          </script>
     </head>
     <body>
@@ -101,7 +99,7 @@
                         <li class="nav-item">
                             <a class="nav-link" href="index.html">Home</a>
                         </li>
-                        <li class="nav-item active">
+                        <li class="nav-item">
                             <a class="nav-link" href="post.html"> Post Board</a>
                         </li>
                         <li id="login" class="nav-item"><a class="nav-link" href="signin.html">Sign In</a></li>
@@ -135,7 +133,7 @@
                              <td>
                                 <form id="form1" runat="server">
                                     <input type='file' id="fileButton" onchange="readURL(this);" />
-                                    <button id="save" onclick="Save();" type="button">저장</button>
+                                    <button id="save" class="btn btn-outline-primary" onclick="Save();" type="button">저장</button>
                                     <img id="blah" name="image" width="400" height="400" src="#" alt="your image" />
                                 </form>
                             </td>
@@ -146,7 +144,8 @@
                         </tr>
                     </tbody>
                 </table>  
-                <button id="btn" onclick="Post();" class="btn btn-outline-primary">업로드</button>                    
+                <button id="btn" onclick="Post();" class="btn btn-outline-primary">업로드</button>       
+                <button type="button" class="btn btn-outline-primary" onClick="location.href='post.html'">돌아가기</button>               
              </div>
              </p>
             </div>
