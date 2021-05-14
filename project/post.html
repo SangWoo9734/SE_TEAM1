@@ -116,22 +116,29 @@
                     <p id="Content"></p>
                     <hr />
                     <!-- Comments form-->
-                    <div class="card my-4">
-                        <h5 class="card-header">Leave a Comment:</h5>
-                        <div class="card-body">
-                            <form>
-                                <div class="form-group"><textarea class="form-control" rows="3"></textarea></div>
-                                <button class="btn btn-primary" type="submit">Submit</button>
-                            </form>
-                        </div>
-                    </div>
-                    <!-- Single comment-->
                     <div class="media mb-4">
                         <div class="media-body">
-                            <h5 class="mt-0">Commenter Name</h5>
-                            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                        </div>
-                    </div>
+                    <table  width="1200px" id="reply_area">
+                        <tr reply_type="all"><!-- 뒤에 댓글 붙이기 쉽게 선언 -->
+                            <td colspan="4"></td>
+                        </tr>
+                        <!-- 댓글이 들어갈 공간 -->
+                    </table>
+                    <table  width="1200px" >
+                        <tr>
+                            <td width="1200px">
+                                <h5" id="reply_writer" name="reply_writer" class="mt-0" placeholder="작성자"></h5>
+                                <button id="reply_save" name="reply_save">댓글 등록</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <textarea id="reply_content" name="reply_content" rows="4" cols="160" placeholder="댓글을 입력하세요."></textarea>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
         </div>
         <!-- Footer-->
         <footer class="py-5 bg-dark">
