@@ -45,6 +45,66 @@
                 }
             });
 
+            function submitComment(){
+                const newcommentEL=document.getElementById("new-comment");
+                const newcomment=newcommentEL.value.trim();
+                var user=firebase.auth().currentUser;
+                var uid=user.email;
+                var now=new Date();
+                if(newcomment){
+                    const publisherEL=document.createElement('div');
+                    publisherEL.classList.add("comment-publisher");
+                    publisherEL.innerText=uid;
+
+                    const contentEL=document.createElement('div');
+                    contentEL.classList.add("comment-content");
+                    contentEL.innerText=newcomment;
+
+                    const Line=document.createElement('hr');
+                    const commentEL=document.createElement('div');
+                    commentEL.classList.add("comment-row");
+                    commentEL.appendChild(publisherEL);
+                    commentEL.appendChild(contentEL);
+                    commentEL.appendChild(Line);
+
+                    document.getElementById('comments').appendChild(commentEL);
+                    newcommentEL.value=""; 
+
+                    db.collection("Post").doc("fBPpHwkrlgBdEO92B8Xb").collection("Comments").add({
+                    Publisher: uid,
+                    Comment: newcomment
+                    }); 
+                }
+            }
+
+            var docRe = db.collection("Post").doc("fBPpHwkrlgBdEO92B8Xb").collection("Comments");
+            docRe.get().then(function(querySnapshot){
+                if (querySnapshot) {
+                    querySnapshot.forEach(function(doc){
+                    const publisherEL=document.createElement('div');
+                    publisherEL.classList.add("comment-publisher");
+                    publisherEL.innerText=doc.data().Comment;
+
+                    const publisherE=document.createElement('div');
+                    publisherE.classList.add("comment-content");
+                    publisherE.innerText=doc.data().Publisher;
+
+                    const Line=document.createElement('hr');
+                    const commentE=document.createElement('div');
+                    commentE.classList.add("comment-row");
+                    commentE.appendChild(publisherEL);
+                    commentE.appendChild(publisherE);
+                    commentE.appendChild(Line);
+                    document.getElementById('comments').appendChild(commentE);
+                    });
+             } else {
+                    // doc.data() will be undefined in this case
+                    console.log("No such document!");
+             }
+            }).catch(function(error){
+                    console.log("Error getting document:", error);
+            });
+
             var docRef = db.collection("Post").doc("PGDMtKrZhlEbZawJyxUx");
             docRef.get().then((doc) => {
                 if (doc.exists) {
@@ -116,29 +176,13 @@
                     <p id="Content"></p>
                     <hr />
                     <!-- Comments form-->
-                    <div class="media mb-4">
-                        <div class="media-body">
-                    <table  width="1200px" id="reply_area">
-                        <tr reply_type="all"><!-- 뒤에 댓글 붙이기 쉽게 선언 -->
-                            <td colspan="4"></td>
-                        </tr>
-                        <!-- 댓글이 들어갈 공간 -->
-                    </table>
-                    <table  width="1200px" >
-                        <tr>
-                            <td width="1200px">
-                                <h5" id="reply_writer" name="reply_writer" class="mt-0" placeholder="작성자"></h5>
-                                <button id="reply_save" name="reply_save">댓글 등록</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <textarea id="reply_content" name="reply_content" rows="4" cols="160" placeholder="댓글을 입력하세요."></textarea>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
+                    <h5 class="card-header">Leave a Comment:</h5>
+                    <div id="comments">
+                        <div>
+                            <textarea id="new-comment" name="new_comment" row=5 cols=140 placeholder="New comment"></textarea>
+                            <button type="submit" onclick="submitComment()">Submit</button>
+                        </div>
+                    </div>
         </div>
         <!-- Footer-->
         <footer class="py-5 bg-dark">
