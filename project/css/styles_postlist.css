@@ -10060,15 +10060,6 @@ th {
   text-align: center;
 }
 
-a{
-  color : black;
-}
-
-a:hover{
-  color : black;
-  text-decoration: underline;
-}
-
 .no-result {
   color : #BBBBBB;
   text-align: center;
@@ -10086,9 +10077,7 @@ a:hover{
   background-color: white;
 }
 
-.post-l{
-  ß
-}
-.post-num:hover{
+.post-link:hover{
   text-decoration: underline;
+  cursor: pointer;
 }
