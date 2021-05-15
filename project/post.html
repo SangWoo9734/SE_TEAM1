@@ -24,6 +24,7 @@
               messagingSenderId: "197301464509",
               appId: "1:197301464509:web:775de202359b76b06836d4"
             };
+            temp = location.href.substr(location.href.lastIndexOf("=")+1);
 
             // Initialize Firebase
             firebase.initializeApp(firebaseConfig);
@@ -70,14 +71,14 @@
                     document.getElementById('comments').appendChild(commentEL);
                     newcommentEL.value=""; 
 
-                    db.collection("Post").doc("fBPpHwkrlgBdEO92B8Xb").collection("Comments").add({
+                    db.collection("Post").doc(temp).collection("Comments").add({
                     Publisher: uid,
                     Comment: newcomment
                     }); 
                 }
             }
 
-            var docRe = db.collection("Post").doc("fBPpHwkrlgBdEO92B8Xb").collection("Comments");
+            var docRe = db.collection("Post").doc(temp).collection("Comments");
             docRe.get().then(function(querySnapshot){
                 if (querySnapshot) {
                     querySnapshot.forEach(function(doc){
@@ -105,7 +106,7 @@
                     console.log("Error getting document:", error);
             });
 
-            var docRef = db.collection("Post").doc("PGDMtKrZhlEbZawJyxUx");
+            var docRef = db.collection("Post").doc(temp);
             docRef.get().then((doc) => {
                 if (doc.exists) {
                     var title = document.getElementById("PostTitle");
@@ -141,9 +142,8 @@
                             <a class="nav-link" href="index.html">Home</a>
                         </li>
                         <li class="nav-item active">
-                            <a class="nav-link" href="post.html">
+                            <a class="nav-link" href="post_list.html">
                                 Post Board
-                                <span class="sr-only">(current)</span>
                             </a>
                         </li>
                         <li id="login" class="nav-item"><a class="nav-link" href="signin.html">Sign In</a></li>

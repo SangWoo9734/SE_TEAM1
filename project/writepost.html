@@ -90,6 +90,7 @@
                     Date: now
                     }); 
                 }).catch(function(error){});
+                alert("업로드 되었습니다");
             }
          </script>
     </head>
@@ -105,7 +106,7 @@
                             <a class="nav-link" href="index.html">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="post.html"> Post Board</a>
+                            <a class="nav-link" href="post_list.html"> Post Board</a>
                         </li>
                         <li id="login" class="nav-item"><a class="nav-link" href="signin.html">Sign In</a></li>
                         <li id="logout" class="nav-item" style="display: none"><a class="nav-link">Sign Out</a></li>
@@ -150,7 +151,7 @@
                     </tbody>
                 </table>  
                 <button id="btn" onclick="Post();" class="btn btn-outline-primary">업로드</button>       
-                <button type="button" class="btn btn-outline-primary" onClick="location.href='post.html'">돌아가기</button>               
+                <button type="button" class="btn btn-outline-primary" onClick="location.href='post_list.html'">돌아가기</button>               
              </div>
              </p>
             </div>

@@ -30,6 +30,22 @@
               firebase.initializeApp(firebaseConfig);
               var db = firebase.firestore();
                // Initialize Firebase
+               firebase.auth().onAuthStateChanged(function(user) {
+                if (user) {
+                    var login = document.getElementById("login");
+                    var logout = document.getElementById("logout");
+
+                    login.style.display = 'none';
+                    logout.style.display = 'block';
+                }
+                else {
+                    var login = document.getElementById("login");
+                    var logout = document.getElementById("logout");
+
+                    login.style.display = 'block';
+                    logout.style.display = 'none';
+                }
+            });
 
             var postInfoRef = db.collection('Post');
 
@@ -116,7 +132,7 @@
             }
 
             function getPost(id){
-                alert(id);
+                window.location.href="post.html?index=" + id;
             }
             
 
@@ -126,19 +142,28 @@
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container">
-                <a class="navbar-brand" href="#!">Recyclude</a>
+                <a class="navbar-brand" href="index.html">Recyclude</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Home</a>
+                        </li>
                         <li class="nav-item active">
-                            <a class="nav-link" href="#!">
-                                Home
+                            <a class="nav-link" href="post_list.html">
+                                Post Board
                                 <span class="sr-only">(current)</span>
                             </a>
                         </li>
-                        <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#!">Services</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#!">Contact</a></li>
+                        <li id="login" class="nav-item"><a class="nav-link" href="signin.html">Sign In</a></li>
+                        <li id="logout" class="nav-item" style="display: none"><a class="nav-link">Sign Out</a></li>
+                        <script>
+                            var logout = document.getElementById("logout");
+                            logout.onclick = function() {
+                                firebase.auth().signOut();
+                                window.location.reload();
+                            }
+                        </script>
                     </ul>
                 </div>
             </div>
@@ -154,7 +179,7 @@
             </div>
             <!-- Call to Action-->
             <div class = "row search-row">
-                <button class="btn btn-outline-primary my-2 my-sm-0 search-btn" type="submit">Post</button>
+                <button class="btn btn-outline-primary my-2 my-sm-0 search-btn" type="submit"><a href="writepost.html">Post</a></button>
                 <form class="form-inline" onsubmit="return false">
                     <input class="form-control mr-sm-2 search-input" type="search" placeholder="Search" aria-label="Search" onkeyup = "enterkey()" id = 'search-word'>
                     <input type="button" class="btn btn-outline-primary my-2 my-sm-0 search-btn"value = "Search" onclick = 'searchPost()' id = 'search-button'>
