@@ -61,4 +61,3 @@ for tag in soup.select('#fontScaleTarget > div.cont_aside > div.cont > div > div
 wr.writerow([3, title, content, imgUrl])
 
 f.close()
-
