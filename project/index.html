@@ -10,6 +10,8 @@
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
+        <!-- Slide image style -->
+        <link href="css/styles_index_info.css" rel="stylesheet">
         <!-- Firebase Part -->
         <script src="https://www.gstatic.com/firebasejs/8.4.0/firebase-app.js"></script>
         <script src="https://www.gstatic.com/firebasejs/8.4.0/firebase-analytics.js"></script>
@@ -80,28 +82,90 @@
             <div class="row align-items-center my-5">
                 <div class="col-lg-7"><img class="img-fluid rounded mb-4 mb-lg-0" src="https://t1.daumcdn.net/cfile/tistory/9927BD455E8C40AE30" alt="..." /></div>
                 <div class="col-lg-5">
-                    <h1 class="font-weight-light">Information Of Recycling</h1>
-                    <p>This is a template that is great for small businesses. It doesn't have too much fancy flare to it, but it makes a great use of the standard Bootstrap core components. Feel free to use this template for any project you want!</p>
+                    <h1 class="font-weight-light">Welcome to Recyclude!</h1>
+                    <p>This web is designed to provide the correct recycling method with a local recycling information. We can communicate with people and proceed QnA for recylcing. Feel free to come and look it up whenever recyling is difficult. Sign in, first!</p>
                     <a class="btn btn-primary" href="#!">Call to Action!</a>
                 </div>
             </div>
-            <!-- Call to Action-->
-            <div class="card text-white bg-secondary my-5 py-4 text-center">
-                <div class="card-body"><p class="text-white m-0">This call to action card is a great place to showcase some important information or display a clever tagline!</p></div>
+        
+            <div class="info">
+                <div class="images">
+                    <img src="recycling_info/recycling_info1024_4.jpg" alt="slide1">
+                    <img src="recycling_info/recycling_info1024_5.jpg" alt="slide2">
+                    <img src="recycling_info/recycling_info1024_6.jpg" alt="slide3">
+                    <img src="recycling_info/recycling_info1024_7.jpg" alt="slide4">
+                    <img src="recycling_info/recycling_info1024_8.jpg" alt="slide5">
+                    <img src="recycling_info/recycling_info1024_9.jpg" alt="slide6">
+                    <img src="recycling_info/recycling_info1024_10.jpg" alt="slide7">
+                    <img src="recycling_info/recycling_info1024_11.jpg" alt="slide8">
+                    <img src="recycling_info/recycling_info1024_12.jpg" alt="slide9">
+                    <img src="recycling_info/recycling_info1024_13.jpg" alt="slide10">
+                    <img src="recycling_info/recycling_info1024_14.jpg" alt="slide11">
+                    <img src="recycling_info/recycling_info1024_15.jpg" alt="slide12">
+                    <img src="recycling_info/recycling_info1024_16.jpg" alt="slide13">
+                </div>
             </div>
+            <div class="btn">
+            <button class="prev">PREV</button>
+            <button class="next">NEXT</button>
+            </div>
+            
+            <script>
+                let curPos = 0;
+                let postion = 0;
+                const IMAGE_WIDTH = 1024;
+                const prevBtn = document.querySelector(".prev")
+                const nextBtn = document.querySelector(".next")
+                const images = document.querySelector(".images")
+                
+                function prev(){
+                if(curPos > 0){
+                    nextBtn.removeAttribute("disabled")
+                    postion += IMAGE_WIDTH;
+                    images.style.transform = `translateX(${postion}px)`;
+                    curPos = curPos - 1;
+                }
+                if(curPos == 0){
+                    prevBtn.setAttribute('disabled', 'true')
+                }
+                }
+                function next(){
+                if(curPos < 12){
+                    prevBtn.removeAttribute("disabled")
+                    postion -= IMAGE_WIDTH;
+                    images.style.transform = `translateX(${postion}px)`;
+                    curPos = curPos + 1;
+                }
+                if(curPos == 12){
+                    nextBtn.setAttribute('disabled', 'true')
+                }
+                }
+                
+                function init(){
+                prevBtn.setAttribute('disabled', 'true')
+                prevBtn.addEventListener("click", prev)
+                nextBtn.addEventListener("click", next)
+                }
+                
+                init();
+            </script>
+
+
             <!-- Content Row-->
             <div class="row">
                 <div class="col-md-4 mb-5">
                     <div class="card h-100">
+                        <!-- <img class="card-img-top" src="#" alt="Card image cap"> -->
                         <div class="card-body">
                             <h2 class="card-title">Card One</h2>
                             <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem magni quas ex numquam, maxime minus quam molestias corporis quod, ea minima accusamus.</p>
                         </div>
-                        <div class="card-footer"><a class="btn btn-primary btn-sm" href="#!">More Info</a></div>
+                        <div class="card-footer"><a class="btn btn-primary btn-sm" href="#">More Info</a></div>
                     </div>
                 </div>
                 <div class="col-md-4 mb-5">
                     <div class="card h-100">
+                        <!-- <img class="card-img-top" src="#" alt="Card image cap"> -->
                         <div class="card-body">
                             <h2 class="card-title">Card Two</h2>
                             <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod tenetur ex natus at dolorem enim! Nesciunt pariatur voluptatem sunt quam eaque, vel, non in id dolore voluptates quos eligendi labore.</p>
@@ -111,6 +175,7 @@
                 </div>
                 <div class="col-md-4 mb-5">
                     <div class="card h-100">
+                        <!-- <img class="card-img-top" src="#" alt="Card image cap"> -->
                         <div class="card-body">
                             <h2 class="card-title">Card Three</h2>
                             <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem magni quas ex numquam, maxime minus quam molestias corporis quod, ea minima accusamus.</p>
