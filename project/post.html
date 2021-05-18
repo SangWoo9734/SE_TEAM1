@@ -51,11 +51,12 @@
                 const newcomment=newcommentEL.value.trim();
                 var user=firebase.auth().currentUser;
                 var uid=user.email;
-                var now=new Date();
+                var userId = uid.split('@')[0];
+                var userIdSecret = userId.replace(userId.substr(3), "*".repeat(userId.substr(3).length));
                 if(newcomment){
                     const publisherEL=document.createElement('div');
                     publisherEL.classList.add("comment-publisher");
-                    publisherEL.innerText=uid;
+                    publisherEL.innerText=userIdSecret;
 
                     const contentEL=document.createElement('div');
                     contentEL.classList.add("comment-content");
@@ -72,7 +73,7 @@
                     newcommentEL.value=""; 
 
                     db.collection("Post").doc(temp).collection("Comments").add({
-                    Publisher: uid,
+                    Publisher: userIdSecret,
                     Comment: newcomment
                     }); 
                 }
@@ -115,10 +116,13 @@
                     var Publisher = document.getElementById("Publisher");
                     document.getElementById("Image").src=doc.data().IMG;
                     // 요소의 콘텐츠를 변경합니다.
+                    
+                    var userId =doc.data().UID.split('@')[0];
+                    var userIdSecret = userId.replace(userId.substr(3), "*".repeat(userId.substr(3).length));
                     title.innerText = doc.data().Title;
                     element.innerText = doc.data().Content;
                     Date.innerText = doc.data().Date;
-                    Publisher.innerText = doc.data().UID;
+                    Publisher.innerText = userIdSecret;
 
              } else {
                     // doc.data() will be undefined in this case
@@ -179,8 +183,8 @@
                     <h5 class="card-header">Leave a Comment:</h5>
                     <div id="comments">
                         <div>
-                            <textarea id="new-comment" name="new_comment" row=5 cols=140 placeholder="New comment"></textarea>
-                            <button type="submit" onclick="submitComment()">Submit</button>
+                            <textarea id="new-comment" name="new_comment" row=5 cols=130 placeholder="New comment"></textarea>
+                            <button type="submit" class="btn btn-outline-primary" onclick="submitComment()">Submit</button>
                         </div>
                     </div>
         </div>
