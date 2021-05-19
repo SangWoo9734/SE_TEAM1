@@ -18,7 +18,7 @@ button, button:active, button:focus{
   width: 100px; height: 30px;
   border: none;
   color: white;
-  background-color: teal;
+  background-color: #AAD34A;
   outline: none;
 }
 button:hover{
