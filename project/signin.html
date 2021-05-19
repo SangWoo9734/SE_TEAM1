@@ -60,7 +60,7 @@
 	    // Initialize Firebase
 	    firebase.initializeApp(firebaseConfig);
 	    // set Persistence of Sign-In status(Until users sign out)
-	    firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+	    firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION);
 		// Temp variable to hold the anonymous user data if needed.
 		var data = null;
 		// Hold a reference to the anonymous current user.
