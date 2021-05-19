@@ -10008,15 +10008,10 @@ h3 {
 }
 
 /* 추가한 css */
-footer {
-  margin-top: 3rem;
-  position:fixed; 
-  left:0px; 
-  bottom:0px; 
-  width:100%; 
-  background:grey; 
-  color: white; 
-  }
+
+.post-list {
+  margin-bottom : 50px;
+}
 
 .search-row {
   display : flex;
