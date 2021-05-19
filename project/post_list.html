@@ -64,11 +64,14 @@
                             '</tr>';
                     
                             $("#post-list").append(post);
+                            
                         });
                     } else {
                         // doc.data() will be undefined in this case
                         console.log("No such document!");
                     }
+                
+                $("#post-list").append('<tr><td colspan = "3" class = "post-last"></td></tr>');
             };
             function allPost(){
                 postInfoRef.get().then(function (querySnapshot){
@@ -112,6 +115,8 @@
                     
                             $("#post-list").append(post);
                         }
+
+                        $("#post-list").append('<tr class = "post-last"><td colspan = "3"></td></tr>');
                     } else {
                         // doc.data() will be undefined in this case
                         console.log("No such document!");
@@ -123,6 +128,8 @@
                     
                     $("#post-list").append(post);
                 });
+
+                
             };
 
             function enterkey() { 

@@ -10068,11 +10068,11 @@ th {
   text-align : center;
 }
 
-.post-num:hover{
-  background-color: white;
-}
-
 .post-link:hover{
   text-decoration: underline;
   cursor: pointer;
+}
+
+.post-last:hover{
+  background-color: white;
 }
