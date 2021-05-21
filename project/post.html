@@ -121,8 +121,8 @@
                     var userIdSecret = userId.replace(userId.substr(3), "*".repeat(userId.substr(3).length));
                     title.innerText = doc.data().Title;
                     element.innerText = doc.data().Content;
-                    Date.innerText = doc.data().Date;
-                    Publisher.innerText = userIdSecret;
+                    Date.innerText = "작성 날짜: "+doc.data().Date;
+                    Publisher.innerText = "작성자: "+userIdSecret;
 
              } else {
                     // doc.data() will be undefined in this case
