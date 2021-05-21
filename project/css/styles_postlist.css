@@ -10073,6 +10073,6 @@ th {
   cursor: pointer;
 }
 
-.post-last:hover{
+.post-last:hover, .post-none:hover{
   background-color: white;
 }
