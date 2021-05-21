@@ -36,3 +36,19 @@ button:disabled{
 .next{
   float: right;
 }
+.card-img-top{
+  height: 250px;
+}
+.card h-100{
+  height: 800px;
+}
+.ellipsis{
+  display: inline-block;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: normal;
+  word-wrap: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
