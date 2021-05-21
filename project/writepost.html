@@ -145,7 +145,7 @@
         <!-- Page content-->
         <div class="container">
             <!-- Title-->
-             <h1 class="mt-4">New Post</h1>
+             <h1 class="mt-4">새 포스트 등록</h1>
             <!-- Author-->
              <p class="lead">
              <div class ="container">
@@ -153,21 +153,21 @@
                     <tbody>
                          <tr>
                              <th>제목 : </th>
-                             <td><input type ="text" name = "title" id = "title" class="form-control" placeholder = "Enter your Title"></td>
+                             <td><input type ="text" name = "title" id = "title" class="form-control" placeholder = "제목을 입력하세요"></td>
                          </tr>
                         <tr>
                              <th>이미지 : </th>
                              <td>
                                 <form id="form1" runat="server">
                                     <input type='file' id="fileButton" onchange="readURL(this);" />
-                                    <img id="blah" name="image" width="200" height="200" src="#" alt="your image" />
+                                    <img id="blah" name="image" width="200" height="200" src="#" alt="이미지 미리보기" />
                                     <button id="save" class="btn btn-outline-primary" onclick="Save();" type="button">저장</button>
                                 </form>
                             </td>
                         </tr>
                         <tr>
                             <th>내용 : </th>
-                            <td><textarea cols="10" rows="25" name = "contents" id = "contents" class="form-control" placeholder = "Enter your Contents"></textarea></td>
+                            <td><textarea cols="10" rows="25" name = "contents" id = "contents" class="form-control" placeholder = "내용을 입력하세요"></textarea></td>
                         </tr>
                     </tbody>
                 </table>  
