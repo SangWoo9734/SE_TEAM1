@@ -52,3 +52,6 @@ button:disabled{
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
 }
+.font-weight-light {
+  font-weight : bolder;
+}
