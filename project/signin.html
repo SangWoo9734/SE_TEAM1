@@ -7,7 +7,9 @@
         <meta name="author" content="" />
         <title>RIC: Sign In</title>
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Style Template -->
         <link href="css/styles.css" rel="stylesheet" />
+        <!-- Firebase Initialization -->
         <script src="https://www.gstatic.com/firebasejs/ui/4.8.0/firebase-ui-auth.js"></script>
 		<link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.0/firebase-ui-auth.css" />
 	</head>
@@ -19,6 +21,7 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
+                    	<!-- Navigation Items -->
                     	<li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
                         <li class="nav-item"><a class="nav-link" href="post_list.html">Post Board</a></li>
                         <li class="nav-item active">
@@ -48,6 +51,7 @@
 	  <script src="https://www.gstatic.com/firebasejs/8.4.0/firebase-auth.js"></script>
 	  <script src="https://www.gstatic.com/firebasejs/8.4.0/firebase-firestore.js"></script>
 	  <script>
+	  	// configuration of our firebase
 	    var firebaseConfig = {
 	      apiKey: "AIzaSyD6ncJWml82Xzk_dVYydIC8NzBUawuJb9E",
 		  authDomain: "se-termproject-team1.firebaseapp.com",
@@ -92,15 +96,19 @@
 			      document.getElementById('loader').style.display = 'none';
 			    }
 			},
+			// URL redirected if sign-in success(main page)
 			signInSuccessUrl: 'index.html',
 			signInOptions: [
 			{
 				signInFlow: 'popup',
 				autoUpgradeAnonymousUsers: true,
+				// E-mail Authorization setup
 				provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
+				// Do not add additional nickname
 				requireDisplayName: true
 			}]
 		};
+		// Sign-in UI starting
 		var ui = new firebaseui.auth.AuthUI(firebase.auth());
 		ui.start('#firebaseui-auth-container', uiconfig);
 	  </script>
