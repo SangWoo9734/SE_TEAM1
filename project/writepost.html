@@ -18,7 +18,7 @@
           <script src="https://www.gstatic.com/firebasejs/8.4.0/firebase-storage.js"></script>
 
           <script>
-             
+             // configuration of our firebase
               var firebaseConfig = {
                   apiKey: "AIzaSyD6ncJWml82Xzk_dVYydIC8NzBUawuJb9E",
                   authDomain: "se-termproject-team1.firebaseapp.com",
@@ -27,19 +27,19 @@
                   messagingSenderId: "197301464509",
                   appId: "1:197301464509:web:775de202359b76b06836d4"
                     };
-              
+              // Initialize Firebase
               firebase.initializeApp(firebaseConfig);
               var db = firebase.firestore();
-               // Initialize Firebase
-            firebase.auth().onAuthStateChanged(function(user) {
-                if (user) {
+               // user status listener
+               firebase.auth().onAuthStateChanged(function(user) {
+                if (user) { // In log-in status, display sign-out button
                     var login = document.getElementById("login");
                     var logout = document.getElementById("logout");
 
                     login.style.display = 'none';
                     logout.style.display = 'block';
                 }
-                else {
+                else { // In log-out status, display sign-in button
                     var login = document.getElementById("login");
                     var logout = document.getElementById("logout");
 
