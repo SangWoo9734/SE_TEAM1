@@ -85,12 +85,15 @@
                 <div class="col-lg-5">
                     <h1 class="font-weight-light">환경을 생각하는 Recyclude</h1>
                     <br>
-                    <p>Recyclude는 지역 재활용 정보와 함께 올바른 재활용 방법을 제공합니다. 재활용하며 생기는 문제를 사람들과 소통하고 QnA를 진행할 수 있습니다. 재활용이 어려울 때는 언제든지 와서 찾아보세요. 먼저 로그인하세요!</p>
+                    <p>Recyclude는 지역 재활용 정보와 함께 올바른 재활용 방법을 제공합니다. 재활용하며 생기는 문제를 사람들과 소통하고 
+                        QnA를 진행할 수 있습니다. 재활용이 어려울 때는 언제든지 와서 찾아보세요. 먼저 로그인하세요!</p>
                 </div>
             </div>
         
+            <!-- Guide photo of basic information of recycling -->
             <div class="info">  
                 <div class="images">
+                    <!-- in recycling_info file, images view -->
                     <img src="recycling_info/recycling_info1024_4.jpg" alt="slide1">
                     <img src="recycling_info/recycling_info1024_5.jpg" alt="slide2">
                     <img src="recycling_info/recycling_info1024_6.jpg" alt="slide3">
@@ -106,42 +109,56 @@
                     <img src="recycling_info/recycling_info1024_16.jpg" alt="slide13">
                 </div>
             </div>
+            <!-- Button for page pass -->
             <div class="btn">
             <button class="prev">이전</button>
             <button class="next">다음</button>
             </div>
             
+            <!-- script of page pass button for .info -->
             <script>
                 let curPos = 0;
                 let postion = 0;
                 const IMAGE_WIDTH = 1024;
+                // select query in btn class
                 const prevBtn = document.querySelector(".prev")
                 const nextBtn = document.querySelector(".next")
                 const images = document.querySelector(".images")
                 
+                // function to view previous image
+                // press button then go to previous view
                 function prev(){
                 if(curPos > 0){
+                    // when there exist previous image
                     nextBtn.removeAttribute("disabled")
+                    // move the position of the image
                     postion += IMAGE_WIDTH;
                     images.style.transform = `translateX(${postion}px)`;
                     curPos = curPos - 1;
                 }
+                // when it is the first image, set disabled
                 if(curPos == 0){
                     prevBtn.setAttribute('disabled', 'true')
                 }
                 }
+                // function to view next image
+                // press button then go to next view
                 function next(){
                 if(curPos < 12){
+                    // when there exist next image
                     prevBtn.removeAttribute("disabled")
+                    // move the position of the image
                     postion -= IMAGE_WIDTH;
                     images.style.transform = `translateX(${postion}px)`;
                     curPos = curPos + 1;
                 }
+                // where it is last image, set disabled
                 if(curPos == 12){
                     nextBtn.setAttribute('disabled', 'true')
                 }
                 }
                 
+                // init status
                 function init(){
                 prevBtn.setAttribute('disabled', 'true')
                 prevBtn.addEventListener("click", prev)
@@ -157,35 +174,50 @@
             <div class="row">
                 <div class="col-md-4 mb-5">
                     <div class="card h-100">
+                        <!-- card image -->
                         <img class="card-img-top" src="https://mediahub.seoul.go.kr/wp-content/uploads/2018/06/ef814e0de768b0502d7731fc7ce2e68a.jpg" alt="Card image cap">
                         <div class="card-body">
+                            <!-- card title -->
                             <h2 class="card-title">[서울사랑] ‘재활용’이 서툰 당신을 위한 안내서</h2>
+                            <!-- card content -->
+                            <!-- ellipsis the content for view -->
                             <p class="ellipsis">우리 주변에는 무심코 버리면 쓰레기지만, 잘만 버리면 자원이 되는 것이 수두룩하다. 재활용품 분리수거를 하는 이유도 자원을 재활용해서 낭비를 줄이고 지구를 건강하게 만들자는 취지다. 무심코 버린 일회용 컵이나 일회용 비닐봉지 등은 지구를 병들게 하는 원인이므로 재활용 분리수거에 꼭 동참하도록 하자.
                                 재활용 역시 계속 변화하는 중이다. 버리는 물건을 분리수거해 재활용하는 리사이클링, 폐현수막과 폐우산 등에 새로운 디자인을 입혀 전혀 다른 제품으로 재탄생시키는 업사이클링을 넘어 아예 쓰레기를 만들지 말자는 프리사이클링도 등장했다. 다양한 재활용과 새활용에 대해 알아본다.
                             </p>
                         </div>
+                        <!-- link the webpage with more button -->
                         <div class="card-footer"><a class="btn btn-primary btn-sm" target="_blank" href="https://mediahub.seoul.go.kr/archives/1161228">더보기</a></div>
                     </div>
                 </div>
                 <div class="col-md-4 mb-5">
                     <div class="card h-100">
+                        <!-- card image -->
                         <img class="card-img-top" src="https://mediahub.seoul.go.kr/wp-content/uploads/mediahub/2021/04/aleDuzzBzZFOZWAiFbewWrcxICKjAdoM.jpg" alt="Card image cap">
                         <div class="card-body">
+                            <!-- card title -->
                             <h2 class="card-title">잘 버리면 돈이 된다! 강동구 '재활용품 유가보상제'</h2>
+                            <!-- card content -->
+                            <!-- ellipsis the content for view -->
                             <p class="ellipsis">코로나19로 음식과 각종 생활용품 배달 주문이 늘면서 배달용기와 포장재 폐기물 문제가 갈수록 커지고 있다. 환경부에 따르면 지난해 상반기 기준 국내 하루 플라스틱 배출량은 전년 같은 기간보다 약 15%나 증가했다고 한다. 이에 강동구는 지난 3월 성내종합사회복지관, ㈜옴니시스템, ㈜동양환경, ㈜에코투게더, 환경오너시민모임과 손잡고 자원순환 보상사업 ‘강동 더(THE)드림’ 업무협약을 체결, 4월 2월부터 성내종합사회복지관에서 본격적으로 사업을 시작했다. 시범사업을 거쳐 강동구 전역으로 확대할 계획이다. 강동 더(THE) 드림은 ‘보태어’라는 의미의 ‘더’와 ‘드리다’의 ‘드림’이 합쳐진 의미다. 주민참여형 재활용품 유가보상제를 도입해 재활용품 수거율을 높이는 것은 물론 올바른 재활용품 배출로 쓰레기 발생량을 줄이고자 추진하는 것으로, 성내종합사회복지관 재활용품 수집 어르신과 함께하는 ‘세미콜론 캠페인’을 위한 사업이기도 하다.
                             </p>
                         </div>
+                        <!-- link the webpage with more button -->
                         <div class="card-footer"><a class="btn btn-primary btn-sm" target="_blank" href="https://mediahub.seoul.go.kr/archives/2001152">더보기</a></div>
                     </div>
                 </div>
                 <div class="col-md-4 mb-5">
                     <div class="card h-100">
+                        <!-- card image -->
                         <img class="card-img-top" src="https://mediahub.seoul.go.kr/wp-content//uploads/mediahub/2021/02/1dd8b86c187f436798326a735c533f25.PNG" alt="Card image cap">
                         <div class="card-body">
+                            <!-- card title -->
                             <h2 class="card-title">페트병이 친환경 섬유로! 재활용의 가치를 높이다</h2>
+                            <!-- card content -->
+                            <!-- ellipsis the content for view -->
                             <p class="ellipsis">플라스틱은 재활용 분리수거 중 가장 배출량이 많은 물품이다. 가볍고 편리한 탓에 사용량이 날로 증가하고 있다. 하지만 그로 인한 환경오염 문제가 심각해져 미래를 위해서라도 플라스틱 사용을 줄이고 친환경 용품으로 대체해야 한다는 목소리가 높아가고 있다. 서울시는 금천‧영등포‧강남구 및 효성티앤씨와 함께 ‘투명 페트병 고부가가치 재활용 확대’ 업무협약(MOU)을 채결해 친환경 제품에 대한 시민 인식을 높이기 위해 발 벗고 나섰다.
                             </p>
                         </div>
+                        <!-- link the webpage with more button -->
                         <div class="card-footer"><a class="btn btn-primary btn-sm" target="_blank" href="https://mediahub.seoul.go.kr/archives/2000380">더보기</a></div>
                     </div>
                 </div>
@@ -197,50 +229,9 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js" type="text/javascript"></script>
-
-        <script type="text/javascript">
-
-            $(function () {
-                // local root
-                var fileName = "SE_pythonfile/src";
-
-                // 파일 이름
-                var parseName = "";	// 파일 이름
-
-                parseName = fileName + '.csv';	// 파일 경로 + 확장자
-                console.log(parseName);
-                
-                $.ajax({
-                    url: parseName,
-                    dataType: "text",
-                    success: function (data) {
-                        var allRow = data;
-                        var textLine = "";
-                        for (var singleRow = 0; singleRow < allRow.length; singleRow++) {
-                            var collapse = allRow[singleRow].split(",");
-
-                            for (var count = 0; count < collapse.length; count++) {
-                                textLine += collapse[count];
-                            }
-                        }
-
-                        $('#textArea').append(textLine);
-                        $('#textArea').append("<br>");
-
-                    },
-                    error : function(request, status, error){
-                        console.log("code = "+ request.status + " message = " + request.responseText + " error = " + error);
-                        console.log(error);
-                    }
-                });
-                console.log('test');
-
-            });
-        </script>           
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js" type="text/javascript"></script>           
 
         <hr>
-        <div id="textArea"></div>
 
         <!-- Footer-->
         <footer class="py-5 bg-dark">
