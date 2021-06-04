@@ -48,6 +48,7 @@
                 }
             });
 
+            //Search files for image inpt
               var imgURL;
             function readURL(input) {
                 if (input.files && input.files[0]) {
@@ -61,6 +62,8 @@
                 }
             }
 
+            //Save selected image to firestore storage
+            //Get URL of that image for recall
             function Save(){
                 var fileButton=document.getElementById("fileButton");
                 var file=fileButton.files[0];
@@ -72,6 +75,7 @@
                 alert("이미지가 저장 되었습니다");
             }
 
+            //Current Date and time
             function getTimestamp(){
                 var d=new Date();
                 var s=leadingZeros(d.getFullYear(),4)+"-"+
@@ -80,7 +84,7 @@
 
                 return s;
             }
-
+            //For customize date and time
             function leadingZeros(n,digits){
                 var zero="";
                 n=n.toString();
@@ -92,17 +96,20 @@
                 return zero+n;
             }
 
+            //Add new post to database
             function Post(){
                 var URL=imgURL;
                 var storage=firebase.storage();
                 var store=storage.ref(URL);
-
+                //Get image url from database
                 store.getDownloadURL().then(function(url){
                 var title=document.getElementById("title").value;
                 var content=document.getElementById("contents").value;
                 var user=firebase.auth().currentUser;
                 var uid=user.email;
                 var now=getTimestamp();
+                
+                //Add new information
                 db.collection("Post").add({
                     Title: title,
                     IMG: url,
@@ -151,27 +158,32 @@
              <div class ="container">
                 <table class ="table table-bordered">
                     <tbody>
-                         <tr>
+                         <tr><!-- Title-->
                              <th>제목 : </th>
                              <td><input type ="text" name = "title" id = "title" class="form-control" placeholder = "제목을 입력하세요"></td>
                          </tr>
-                        <tr>
+                        <tr><!-- Image-->
                              <th>이미지 : </th>
                              <td>
                                 <form id="form1" runat="server">
                                     <input type='file' id="fileButton" onchange="readURL(this);" />
+                                    <!-- Image Preview-->
                                     <img id="blah" name="image" width="200" height="200" src="#" alt="이미지 미리보기" />
+                                    <!-- Save button-->
                                     <button id="save" class="btn btn-outline-primary" onclick="Save();" type="button">저장</button>
                                 </form>
                             </td>
                         </tr>
                         <tr>
+                            <!-- Contents-->
                             <th>내용 : </th>
                             <td><textarea cols="10" rows="25" name = "contents" id = "contents" class="form-control" placeholder = "내용을 입력하세요"></textarea></td>
                         </tr>
                     </tbody>
                 </table>  
-                <button id="btn" onclick="Post();" class="btn btn-outline-primary">업로드</button>       
+                <!-- Upload button-->
+                <button id="btn" onclick="Post();" class="btn btn-outline-primary">업로드</button>
+                <!-- Go back to post list-->       
                 <button type="button" class="btn btn-outline-primary" onClick="location.href='post_list.html'">돌아가기</button>               
              </div>
              </p>

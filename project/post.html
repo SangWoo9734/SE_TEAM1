@@ -47,8 +47,10 @@
                     logout.style.display = 'none';
                 }
             });
-
+            
+            //Adding new comment to post
             function submitComment(){
+                //Get information of new comment( publisher, content)
                 const newcommentEL=document.getElementById("new-comment");
                 const newcomment=newcommentEL.value.trim();
                 var user=firebase.auth().currentUser;
@@ -56,43 +58,50 @@
                 var userId = uid.split('@')[0];
                 var userIdSecret = userId.replace(userId.substr(3), "*".repeat(userId.substr(3).length));
                 if(newcomment){
+                    //Get publisher name
                     const publisherEL=document.createElement('div');
                     publisherEL.classList.add("comment-publisher");
                     publisherEL.innerText=userIdSecret;
-
+                    //Get comment actual content
                     const contentEL=document.createElement('div');
                     contentEL.classList.add("comment-content");
                     contentEL.innerText=newcomment;
 
+                    //Make new space for comment
+                    //Publisher and comment will be included
                     const Line=document.createElement('hr');
                     const commentEL=document.createElement('div');
                     commentEL.classList.add("comment-row");
                     commentEL.appendChild(publisherEL);
                     commentEL.appendChild(contentEL);
                     commentEL.appendChild(Line);
-
                     document.getElementById('comments').appendChild(commentEL);
                     newcommentEL.value=""; 
 
+                    //Add new comment to database
                     db.collection("Post").doc(temp).collection("Comments").add({
                     Publisher: userIdSecret,
                     Comment: newcomment
                     }); 
                 }
             }
-
+            
+            //Get commetns from database and display in Post page
             var docRe = db.collection("Post").doc(temp).collection("Comments");
             docRe.get().then(function(querySnapshot){
                 if (querySnapshot) {
                     querySnapshot.forEach(function(doc){
+                    //Get publisher name
                     const publisherEL=document.createElement('div');
                     publisherEL.classList.add("comment-publisher");
                     publisherEL.innerText=doc.data().Comment;
-
+                    //Get comment actual content
                     const publisherE=document.createElement('div');
                     publisherE.classList.add("comment-content");
                     publisherE.innerText=doc.data().Publisher;
 
+                    //Make new space for comment
+                    //Publisher and comment will be included
                     const Line=document.createElement('hr');
                     const commentE=document.createElement('div');
                     commentE.classList.add("comment-row");
@@ -108,7 +117,10 @@
             }).catch(function(error){
                     console.log("Error getting document:", error);
             });
-
+            
+            //Post page interface
+            //Title, image, content and other components are included
+            //Search Data base "Post" collection
             var docRef = db.collection("Post").doc(temp);
             docRef.get().then((doc) => {
                 if (doc.exists) {
@@ -117,8 +129,8 @@
                     var Date = document.getElementById("Date");
                     var Publisher = document.getElementById("Publisher");
                     document.getElementById("Image").src=doc.data().IMG;
-                    // 요소의 콘텐츠를 변경합니다.
                     
+                    //Change the contents of Post page
                     var userId =doc.data().UID.split('@')[0];
                     var userIdSecret = userId.replace(userId.substr(3), "*".repeat(userId.substr(3).length));
                     title.innerText = doc.data().Title;
@@ -179,6 +191,7 @@
                     <!-- Preview image-->
                     <img id="Image" class="img-fluid rounded" alt="..." />
                     <hr />
+                    <!-- Content-->
                     <p id="Content"></p>
                     <hr />
                     <!-- Comments form-->
